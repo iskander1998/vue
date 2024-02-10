@@ -1,32 +1,13 @@
 <template>
-  <h1 v-if="count === 1">hello</h1>
-  <h1 v-else>{{ count }}</h1>
-  <button @click="add_count">{{ name_of_button }}</button>
-  <button @click="delete_digit">Delete this digit</button>
-  <input type="text" />
-  <p></p>
-  Password: <input type="text" value="Введите пароль" />
+  <SignUp />
 </template>
 
 <script>
+import SignUp from "./components/SignUp.vue";
 export default {
   name: "App",
-
-  data() {
-    return {
-      name_of_button: "add digit",
-      count: 1,
-    };
-  },
-
-  methods: {
-    add_count() {
-      this.count++;
-      console.log(this.count);
-    },
-    delete_digit() {
-      this.count--;
-    },
+  components: {
+    SignUp,
   },
 };
 </script>
