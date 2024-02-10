@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "name": "admin",
+      "email": "admin@admin.ru",
+      "password": "admin"
+    },
+    {
+      "id": "ad70",
+      "email": "Iskan@maul.ru",
+      "password": "iskander123",
+      "name": "Iskan"
+    },
+    {
+      "id": "3add",
+      "email": "Iskan@maul.ru",
+      "password": "iskander123",
+      "name": "Iskan"
+    },
+    {
+      "id": "063a",
+      "email": "123",
+      "password": "123",
+      "name": "123"
+    }
+  ]
+}
