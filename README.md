@@ -1,6 +1,6 @@
 # pro
 
-## Project setup
+## Установка зависимостей
 ```
 npm install
 ```
