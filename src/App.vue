@@ -24,7 +24,8 @@ body {
   width: 100px;
 }
 .register input,
-.login input {
+.login input,
+.add input {
   width: 300px;
   height: 30px;
   padding-left: 20px;
@@ -35,7 +36,8 @@ body {
   border: 1px solid rgb(0, 0, 0);
 }
 .register button,
-.login button {
+.login button,
+.add button {
   width: 320px;
   height: 50px;
   border: 1px solid black;
@@ -45,5 +47,13 @@ body {
 }
 .title {
   color: black;
+}
+.login .icon,
+.register .icon {
+  position: relative;
+  display: inline;
+  width: 320px;
+  height: 30px;
+  background-color: gray;
 }
 </style>

@@ -2,7 +2,6 @@
   <div class="nav">
     <router-link to="/">Главная</router-link>
     <router-link to="/Add">Создать новую заметку</router-link>
-    <router-link to="/Update">Изменить</router-link>
     <a @click="logout" href="#">Выйти</a>
   </div>
 </template>

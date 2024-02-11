@@ -3,8 +3,17 @@
   <h1 class="title">Войти в TodoApp</h1>
   <div class="login">
     <input type="text" v-model="name" placeholder="Введите логин" />
-    <input type="password" v-model="password" placeholder="Введите пароль" />
-    <button @click="login">Ввойти</button>
+    <input
+      :type="passwordFieldType"
+      v-on:keyup.enter="login"
+      v-model="password"
+      placeholder="Введите пароль"
+    />
+    <button class="icon" @click="switchVisibility">
+      Показать / Скрыть пароль
+    </button>
+    <p></p>
+    <button @click="login">Войти</button>
     <p>
       <router-link to="/sign-up"> Перейти на страницу регистрации </router-link>
     </p>
@@ -18,6 +27,7 @@ export default {
     return {
       name: "",
       password: "",
+      passwordFieldType: "password",
     };
   },
   methods: {
@@ -33,6 +43,10 @@ export default {
 
       console.log(result);
     },
+    switchVisibility() {
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
+    },
   },
   mounted() {
     let user = localStorage.getItem("user-info");
@@ -42,3 +56,4 @@ export default {
   },
 };
 </script>
+<style></style>

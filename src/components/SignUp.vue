@@ -4,7 +4,15 @@
   <div class="register">
     <input type="text" v-model="name" placeholder="Введите логин" />
     <input type="text" v-model="email" placeholder="Введите ваш Email" />
-    <input type="password" v-model="password" placeholder="Введите пароль" />
+    <input
+      :type="passwordFieldType"
+      v-model="password"
+      placeholder="Введите пароль"
+    />
+    <button class="icon" @click="switchVisibility">
+      Показать / Скрыть пароль
+    </button>
+    <p></p>
     <button @click="signUp">Зарегестрироваться</button>
     <p>
       <router-link to="/login"> Перейти на страницу входа </router-link>
@@ -20,6 +28,7 @@ export default {
       name: "",
       email: "",
       password: "",
+      passwordFieldType: "password",
     };
   },
   methods: {
@@ -34,6 +43,10 @@ export default {
         localStorage.setItem("user-info", JSON.stringify(result.data));
         this.$router.push({ name: "Home" });
       }
+    },
+    switchVisibility() {
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
     },
   },
   mounted() {
