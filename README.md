@@ -1,23 +1,23 @@
-# pro
+# TodoApp
 
-## Project setup
+## Установка зависимостей
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Запуск локального сервера
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Установка json-server для корректной работы приложения
 ```
-npm run build
+npm install -g json-server
 ```
 
-### Lints and fixes files
+### Запуск json-server из ./src/components для работы с бд приложения
 ```
-npm run lint
+npx json-server db.json
 ```
 
 ### Customize configuration
