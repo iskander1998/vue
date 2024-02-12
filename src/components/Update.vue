@@ -13,6 +13,7 @@
       name="name"
       placeholder="Введите текст заметки"
       v-model="notes.text"
+      Сделано
     />
     <button type="button" @click="updateNote">Изменить заметку</button>
   </form>
@@ -52,6 +53,7 @@ export default {
         {
           name: this.notes.name,
           text: this.notes.text,
+          checked: this.notes.checked,
         }
       );
       if (result.status == 200) {

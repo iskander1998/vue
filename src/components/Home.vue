@@ -5,11 +5,17 @@
     <tr class="titles">
       <td>Название заметки</td>
       <td>Список дел</td>
+      <td>Отметить выполнение</td>
+      <td>Статус</td>
       <td>Действия</td>
     </tr>
     <tr v-for="item in notes" :key="item.id">
       <td>{{ item.name }}</td>
       <td>{{ item.text }}</td>
+      <td>
+        <input type="checkbox" v-model="item.checked" />
+      </td>
+      <p>{{ item.checked ? "Сделано ✅" : "Не сделано 🛑" }}</p>
       <td>
         <router-link class="update" :to="'/update/' + item.id"
           >Изменить</router-link
