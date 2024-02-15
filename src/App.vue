@@ -21,6 +21,7 @@ body {
   margin: 0;
 }
 .logo {
+  padding-top: 100px;
   width: 100px;
 }
 .register input,
@@ -33,7 +34,8 @@ body {
   margin-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid gray;
+  border-radius: 10px;
 }
 .register button,
 .login button,
@@ -44,6 +46,8 @@ body {
   background: black;
   color: white;
   cursor: pointer;
+  border-radius: 10px;
+  font-size: 15px;
 }
 .title {
   color: black;

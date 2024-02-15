@@ -4,14 +4,16 @@
   <div class="register">
     <input type="text" v-model="name" placeholder="Введите логин" />
     <input type="text" v-model="email" placeholder="Введите ваш Email" />
-    <input
-      :type="passwordFieldType"
-      v-model="password"
-      placeholder="Введите пароль"
-    />
-    <button class="icon" @click="switchVisibility">
-      Показать / Скрыть пароль
-    </button>
+    <div class="pass">
+      <input
+        class="pass1"
+        :type="passwordFieldType"
+        v-on:keyup.enter="login"
+        v-model="password"
+        placeholder="Введите пароль"
+      />
+      <button class="icon1" @click="switchVisibility">👁</button>
+    </div>
     <p></p>
     <button @click="signUp">Зарегестрироваться</button>
     <p>
