@@ -61,6 +61,48 @@
       "text": "Убрать снег",
       "checked": false,
       "id": "1a26"
+    },
+    {
+      "id": "9f04",
+      "name": "фыв",
+      "text": "фыв",
+      "checked": false
+    },
+    {
+      "id": "2b51",
+      "name": "фыв",
+      "text": "фыв",
+      "checked": false
+    },
+    {
+      "id": "73eb",
+      "name": "",
+      "text": "",
+      "checked": false
+    },
+    {
+      "id": "81ce",
+      "name": "",
+      "text": "",
+      "checked": false
+    },
+    {
+      "id": "15b0",
+      "name": "",
+      "text": "",
+      "checked": false
+    },
+    {
+      "id": "a7cc",
+      "name": "",
+      "text": "",
+      "checked": false
+    },
+    {
+      "id": "bad1",
+      "name": "",
+      "text": "",
+      "checked": false
     }
   ]
 }
