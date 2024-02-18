@@ -46,6 +46,7 @@
         {{ note }}
       </div>
       <p>{{ notesText[index] }}</p>
+      <router-link class="update" :to="'/update/' + note">Изменить</router-link>
       <p></p>
       <p></p>
     </div>

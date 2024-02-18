@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "SignUp",
   data() {
@@ -35,16 +35,19 @@ export default {
   },
   methods: {
     async signUp() {
-      let result = await axios.post("http://localhost:3000/users", {
-        email: this.email,
-        password: this.password,
-        name: this.name,
-      });
-      console.warn(result);
-      if (result.status == 201) {
-        localStorage.setItem("user-info", JSON.stringify(result.data));
-        this.$router.push({ name: "Home" });
-      }
+      let result =
+        // await axios.post("http://localhost:3000/users",
+        [
+          {
+            email: this.email,
+            password: this.password,
+            name: this.name,
+          },
+        ];
+      // console.warn(result);
+      // if (result.status == 201) {
+      localStorage.setItem("user-info", JSON.stringify(result));
+      this.$router.push({ name: "Home" });
     },
     switchVisibility() {
       this.passwordFieldType =

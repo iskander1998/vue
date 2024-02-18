@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "Login",
   data() {
@@ -32,16 +32,22 @@ export default {
   },
   methods: {
     async login() {
-      let result = await axios.get(
-        `http://localhost:3000/users?name=${this.name}&password=${this.password}`
-      );
+      let result = [
+        {
+          email: this.email,
+          password: this.password,
+          name: this.name,
+        },
+      ];
+      // await axios.get(
+      //   `http://localhost:3000/users?name=${this.name}&password=${this.password}`
+      // );
 
-      if (result.status == 200 && result.data.length > 0) {
-        localStorage.setItem("user-info", JSON.stringify(result.data[0]));
+      // if (result.this.name == 200 && result.data.length > 0) {
+      if (this.name == "admin" && this.password == "admin") {
+        localStorage.setItem("user-info", JSON.stringify(result));
         this.$router.push({ name: "Home" });
       } else alert("Неверный логин или пароль");
-
-      console.log(result);
     },
     switchVisibility() {
       this.passwordFieldType =
