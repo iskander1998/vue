@@ -31,7 +31,17 @@
   <p></p>
   <div class="note">
     <div class="item" v-for="(note, index) in notes1" v-bind:key="note">
-      <button class="del_but" @click="removeNote(index)">X</button>
+      <teleport to="body">
+        <div v-if="modalOpen" class="modal">
+          <div>
+            <div class="title">Подтверждаете удаление ?</div>
+            <p></p>
+            <button class="btnYes" @click="removeNote(index)">OK</button>
+            <button class="btnNo" @click="modalOpen = false">Отмена</button>
+          </div>
+        </div>
+      </teleport>
+      <button class="del_but" @click="modalOpen = true">X</button>
       <div class="title_field">
         {{ note }}
       </div>
@@ -54,6 +64,7 @@ export default {
       notesText: [],
       newText: null,
       newNote: null,
+      modalOpen: false,
     };
   },
   async mounted() {
@@ -105,11 +116,12 @@ export default {
       this.saveNotes();
     },
     removeNote(x) {
-      if (confirm("Are you sure?")) {
-        this.notes1.splice(x, 1);
-        this.notesText.splice(x, 1);
-        this.saveNotes();
-      }
+      // if (confirm("Are you sure?")) {
+      this.modalOpen = false;
+      this.notes1.splice(x, 1);
+      this.notesText.splice(x, 1);
+      this.saveNotes();
+      // }
     },
     saveNotes() {
       let parsed1 = JSON.stringify(this.notes1);
@@ -272,5 +284,73 @@ td {
   width: 89%;
   font-size: 25px;
   font-weight: 600;
+}
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@font-face {
+  font-family: "San Francisco";
+  src: url("https://example.com/fonts/SanFrancisco.ttf") format("truetype");
+}
+.modal .title {
+  font-size: 17pt;
+  font-weight: 500;
+  font-family: "San Francisco";
+}
+
+.modal div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 350px;
+  height: 150px;
+  padding: 5px;
+  text-align: center;
+  border-color: black;
+  border-radius: 10px;
+  position: relative;
+}
+.modal .btnYes {
+  font-size: 17pt;
+  position: absolute;
+  align-items: center;
+  right: 0;
+  bottom: 0;
+  width: 180px;
+  height: 45px;
+  display: flex;
+  color: #0376f5;
+  background-color: #c1c1c1;
+  border-color: #c1c1c1;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom-right-radius: 10px;
+}
+.modal .btnNo {
+  font-size: 17pt;
+  position: absolute;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  width: 180px;
+  height: 45px;
+  display: flex;
+  color: #0376f5;
+  background-color: #c1c1c1;
+  border-color: #c1c1c1;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom-left-radius: 10px;
 }
 </style>
