@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <h1>Привет {{ name }}, список всех заметок:</h1>
+  <h1>Привет {{ userinfo.name }}, список всех заметок:</h1>
   <!-- <table border="1" align="center">
     <tr class="titles">
       <td>Название заметки</td>
@@ -66,6 +66,7 @@ export default {
       newText: null,
       newNote: null,
       modalOpen: false,
+      userinfo: [],
     };
   },
   async mounted() {
@@ -82,6 +83,13 @@ export default {
         this.notesText = JSON.parse(localStorage.getItem("notesText"));
       } catch (e) {
         localStorage.removeItem("notesText");
+      }
+    }
+    if (localStorage.getItem("user-info")) {
+      try {
+        this.userinfo = JSON.parse(localStorage.getItem("user-info"));
+      } catch (e) {
+        localStorage.removeItem("user-info");
       }
     }
   },

@@ -32,13 +32,11 @@ export default {
   },
   methods: {
     async login() {
-      let result = [
-        {
-          email: this.email,
-          password: this.password,
-          name: this.name,
-        },
-      ];
+      let result = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+      };
       // await axios.get(
       //   `http://localhost:3000/users?name=${this.name}&password=${this.password}`
       // );
