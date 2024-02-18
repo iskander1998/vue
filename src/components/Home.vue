@@ -105,9 +105,11 @@ export default {
       this.saveNotes();
     },
     removeNote(x) {
-      this.notes1.splice(x, 1);
-      this.notesText.splice(x, 1);
-      this.saveNotes();
+      if (confirm("Are you sure?")) {
+        this.notes1.splice(x, 1);
+        this.notesText.splice(x, 1);
+        this.saveNotes();
+      }
     },
     saveNotes() {
       let parsed1 = JSON.stringify(this.notes1);
@@ -176,6 +178,11 @@ td {
   font-size: 100%;
   border-radius: 10px;
   position: relative;
+  cursor: pointer;
+  transition: 1s;
+}
+.note .item:hover {
+  transform: scale(1.1);
 }
 .note .item .del_but {
   position: absolute;
