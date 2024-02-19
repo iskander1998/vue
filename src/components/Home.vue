@@ -2,33 +2,6 @@
   <Header />
   <h1>Привет {{ userinfo.name }}, список всех заметок:</h1>
   <div>Кликните по заголовку или тексту для редактирования заметки</div>
-  <!-- <table border="1" align="center">
-    <tr class="titles">
-      <td>Название заметки</td>
-      <td>Список дел</td>
-      <td>Отметить выполнение</td>
-      <td>Статус</td>
-      <td>Действия</td>
-    </tr>
-    <tr v-for="item in notes" :key="item.id">
-      <td>{{ item.name }}</td>
-      <td>{{ item.text }}</td>
-      <td>
-        <input type="checkbox" v-model="item.checked" />
-      </td>
-      <p>{{ item.checked ? "Сделано ✅" : "Не сделано 🛑" }}</p>
-      <td>
-        <router-link class="update" :to="'/update/' + item.id"
-          >Изменить</router-link
-        >
-        <button class="delete" @click="deleteNote(item.id)">Удалить</button>
-      </td>
-    </tr>
-  </table> -->
-  <!-- Введите название заметки: <input v-model="newNote" />
-  <p></p>
-  Введите текст <input v-model="newText" />
-  <button @click="addNote">add</button> -->
   <p></p>
   <div class="note">
     <div class="item" v-for="(note, index) in notes1" v-bind:key="index">
@@ -78,7 +51,6 @@
       <p @click="editState[index] = !editState[index]" class="text_field">
         {{ notesText[index] }}
       </p>
-      <!-- <router-link class="update" :to="'/update/' + note">Изменить</router-link> -->
       <p></p>
       <p></p>
     </div>
@@ -86,7 +58,6 @@
 </template>
 <script>
 import Header from "./Header.vue";
-// import axios from "axios";
 export default {
   name: "Home",
   data() {
@@ -103,7 +74,6 @@ export default {
     };
   },
   async mounted() {
-    // this.loadData();
     let user = localStorage.getItem("user-info");
     if (!user) {
       this.$router.push({ name: "SignUp" });
@@ -134,24 +104,6 @@ export default {
     Header,
   },
   methods: {
-    // {
-    // async deleteNote(id) {
-    //   let result = await axios.delete("http://localhost:3000/notes/" + id);
-    //   console.warn(result);
-    //   if (result.status == 200) {
-    //     this.loadData();
-    //   }
-    // },
-    // async loadData() {
-    //   let user = localStorage.getItem("user-info");
-    //   this.name = JSON.parse(user).name;
-    //   if (!user) {
-    //     this.$router.push({ name: "SignUp" });
-    //   }
-    // let result = await axios.get("http://localhost:3000/notes");
-    // console.warn(result);
-    // this.notes = result.data;
-    // },
     addNote() {
       if (!this.newNote && !this.newText) {
         return;
@@ -163,13 +115,11 @@ export default {
       this.saveNotes();
     },
     removeNote(x) {
-      // if (confirm("Are you sure?")) {
       this.modalOpen = false;
       this.notes1.splice(x, 1);
       this.notesText.splice(x, 1);
       this.editState.splice(x, 1);
       this.saveNotes();
-      // }
     },
     saveNotes() {
       let parsed1 = JSON.stringify(this.notes1);

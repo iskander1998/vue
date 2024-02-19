@@ -1,21 +1,5 @@
 <template>
   <Header />
-  <!-- <h1>Добавить заметку</h1>
-  <form class="add">
-    <input
-      type="text"
-      name="name"
-      placeholder="Введите название заметки"
-      v-model="notes.name"
-    />
-    <input
-      type="text"
-      name="name"
-      placeholder="Введите текст заметки"
-      v-model="notes.text"
-    />
-    <button type="button" @click="addNote">Добавить заметку</button>
-  </form> -->
   <h1>Добавить заметку</h1>
   <form class="add">
     <input
@@ -34,7 +18,6 @@
   </form>
 </template>
 <script>
-// import axios from "axios";
 import Header from "./Header.vue";
 export default {
   name: "Add",

@@ -20,7 +20,6 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
 export default {
   name: "Login",
   data() {
@@ -37,11 +36,6 @@ export default {
         password: this.password,
         name: this.name,
       };
-      // await axios.get(
-      //   `http://localhost:3000/users?name=${this.name}&password=${this.password}`
-      // );
-
-      // if (result.this.name == 200 && result.data.length > 0) {
       if (this.name == "admin" && this.password == "admin") {
         localStorage.setItem("user-info", JSON.stringify(result));
         this.$router.push({ name: "Home" });
