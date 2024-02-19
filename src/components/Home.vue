@@ -1,6 +1,7 @@
 <template>
   <Header />
   <h1>Привет {{ userinfo.name }}, список всех заметок:</h1>
+  <div>Кликните по заголовку или тексту для редактирования заметки</div>
   <!-- <table border="1" align="center">
     <tr class="titles">
       <td>Название заметки</td>
@@ -30,7 +31,7 @@
   <button @click="addNote">add</button> -->
   <p></p>
   <div class="note">
-    <div class="item" v-for="(note, index) in notes1" v-bind:key="note">
+    <div class="item" v-for="(note, index) in notes1" v-bind:key="index">
       <teleport to="body">
         <div v-if="modalOpen" class="modal">
           <div>
@@ -42,11 +43,42 @@
         </div>
       </teleport>
       <button class="del_but" @click="modalOpen = true">X</button>
+      <button class="upd_but" @click="editState[index] = !editState[index]">
+        ✒️
+      </button>
       <div class="title_field">
-        {{ note }}
+        <div class="button" @click="editState[index] = !editState[index]">
+          {{ note }}
+        </div>
       </div>
-      <p>{{ notesText[index] }}</p>
-      <router-link class="update" :to="'/update/' + note">Изменить</router-link>
+      <p></p>
+      <div class="text" v-show="editState[index]">
+        Изменить заголовок заметки:
+        <p></p>
+        <input
+          class="input_text"
+          type="text"
+          name="name"
+          placeholder="Введите название заметки"
+          v-model="this.notes1[index]"
+        />
+        <p></p>
+        Изменить текст заметки:
+        <p></p>
+        <input
+          class="input_text"
+          type="text"
+          name="name"
+          placeholder="Введите текст заметки"
+          v-model="this.notesText[index]"
+        />
+        <button class="sv_but" @click="updateNotes(index)">💾</button>
+        <button class="cn_but" @click="cancelNotes(index)">⛔</button>
+      </div>
+      <p @click="editState[index] = !editState[index]" class="text_field">
+        {{ notesText[index] }}
+      </p>
+      <!-- <router-link class="update" :to="'/update/' + note">Изменить</router-link> -->
       <p></p>
       <p></p>
     </div>
@@ -67,6 +99,7 @@ export default {
       newNote: null,
       modalOpen: false,
       userinfo: [],
+      editState: [],
     };
   },
   async mounted() {
@@ -134,6 +167,7 @@ export default {
       this.modalOpen = false;
       this.notes1.splice(x, 1);
       this.notesText.splice(x, 1);
+      this.editState.splice(x, 1);
       this.saveNotes();
       // }
     },
@@ -142,6 +176,18 @@ export default {
       localStorage.setItem("notes1", parsed1);
       let parsedText = JSON.stringify(this.notesText);
       localStorage.setItem("notesText", parsedText);
+      let parsedState = JSON.stringify(this.editState);
+      localStorage.setItem("editState", parsedState);
+    },
+    updateNotes(x) {
+      this.notes1.x = JSON.stringify(this.notes1[x]);
+      this.notesText.x = JSON.stringify(this.notesText[x]);
+      this.editState[x] = false;
+      this.saveNotes();
+    },
+    cancelNotes() {
+      this.notesText = JSON.parse(localStorage.getItem("notesText"));
+      this.notes1 = JSON.parse(localStorage.getItem("notes1"));
     },
   },
 };
@@ -152,32 +198,6 @@ td {
   height: 40px;
 }
 
-.delete {
-  background: rgb(236, 143, 143);
-  color: whitesmoke;
-  border-color: black;
-  cursor: pointer;
-  font-size: 17px;
-  border-radius: 5px;
-  padding-left: 45px;
-  padding-right: 45px;
-}
-.delete :hover {
-  background: black;
-  color: black;
-}
-.update {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
-  text-decoration: none;
-  color: whitesmoke;
-  background: rgb(140, 187, 140);
-  border-color: black;
-  border-radius: 5px;
-  font-size: 17px;
-}
 .titles {
   color: Black;
   font-size: 18px;
@@ -210,6 +230,79 @@ td {
 .note .item:hover {
   transform: scale(1.1);
 }
+.note .item .update {
+  position: absolute;
+  left: 1;
+  bottom: 0;
+  right: 1;
+  top: 1;
+  height: 25px;
+  width: 30px;
+  background-color: rgb(209, 9, 9);
+  border-radius: 10px;
+  border-color: rgb(61, 43, 43);
+  cursor: pointer;
+  /*  */
+  border: none;
+  outline: none;
+  color: white;
+  background: #ffffff;
+  z-index: 0;
+}
+.note .item .upd_but {
+  position: absolute;
+  left: 1;
+  bottom: 0;
+  right: 0;
+  height: 25px;
+  width: 30px;
+  background-color: rgb(209, 9, 9);
+  border-radius: 10px;
+  border-color: rgb(61, 43, 43);
+  cursor: pointer;
+  /*  */
+  border: none;
+  outline: none;
+  color: white;
+  background: #ffffff;
+  z-index: 0;
+}
+.note .item .sv_but {
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+  top: 1;
+  height: 25px;
+  width: 30px;
+  background-color: rgb(209, 9, 9);
+  border-radius: 10px;
+  border-color: rgb(61, 43, 43);
+  cursor: pointer;
+  /*  */
+  border: none;
+  outline: none;
+  color: white;
+  background: #ffffff;
+  z-index: 0;
+}
+.note .item .cn_but {
+  position: absolute;
+  right: 20%;
+  bottom: 0;
+  top: 1;
+  height: 25px;
+  width: 30px;
+  background-color: rgb(209, 9, 9);
+  border-radius: 10px;
+  border-color: rgb(61, 43, 43);
+  cursor: pointer;
+  /*  */
+  border: none;
+  outline: none;
+  color: white;
+  background: #ffffff;
+  z-index: 0;
+}
 .note .item .del_but {
   position: absolute;
   left: 1;
@@ -228,7 +321,10 @@ td {
   background: #ffffff;
   z-index: 0;
 }
-.del_but:before {
+.del_but:before,
+.upd_but:before,
+.sv_but:before,
+.cn_but:before {
   content: "";
   background: linear-gradient(
     45deg,
@@ -256,25 +352,37 @@ td {
   border-radius: 10px;
 }
 
-.del_but:active {
+.del_but:active,
+.upd_but:active,
+.sv_but:active,
+.cn_but:active {
   color: #d60000;
 }
 
-.del_but:active:after {
+.del_but:active:after,
+.upd_but:active:after,
+.sv_but:active:after,
+.cn_but:active:after {
   background: transparent;
 }
 
-.del_but:hover:before {
+.del_but:hover:before,
+.upd_but:hover:before,
+.sv_but:hover:before,
+.cn_but:hover:before {
   opacity: 1;
 }
 
-.del_but:after {
+.del_but:after,
+.upd_but:after,
+.sv_but:after,
+.cn_but:after {
   z-index: -1;
   content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgb(0, 0, 0);
+  background: rgb(0, 0, 0, 0.4);
   left: 0;
   top: 0;
   border-radius: 10px;
@@ -291,14 +399,33 @@ td {
     background-position: 0 0;
   }
 }
+/*  */
+/* СТИЛИ ОГЛАВЛЕНИЯ И ВВОДА ТЕКСТА В ЭКЗМЕПЛЯРЕ ЗАМЕТКИ */
+/*  */
 .title_field {
   color: black;
   padding-top: 3%;
   padding-right: 20px;
-  width: 89%;
+  width: 90%;
   font-size: 25px;
   font-weight: 600;
+  word-wrap: break-word;
 }
+.text_field {
+  padding-top: 3%;
+  padding-right: 20px;
+  width: 90%;
+  word-wrap: break-word;
+}
+.input_text {
+  padding-top: 3%;
+  padding-right: 20px;
+  width: 90%;
+  word-wrap: break-word;
+}
+/*  */
+/* СТИЛИ МОДАЛЬНОГО ОКНА */
+/*  */
 .modal {
   position: absolute;
   top: 0;

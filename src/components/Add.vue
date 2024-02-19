@@ -57,6 +57,13 @@ export default {
         localStorage.removeItem("notesText");
       }
     }
+    if (localStorage.getItem("editState")) {
+      try {
+        this.editState = JSON.parse(localStorage.getItem("editState"));
+      } catch (e) {
+        localStorage.removeItem("editState");
+      }
+    }
   },
   components: {
     Header,
@@ -74,6 +81,8 @@ export default {
       // },
       notes1: [],
       notesText: [],
+      editState: [],
+      newEditState: false,
       newText: null,
       newNote: null,
     };
@@ -98,6 +107,8 @@ export default {
       this.newNote = "";
       this.notesText.push(this.newText);
       this.newText = "";
+      this.editState.push(this.newEditState);
+      this.newEditState = "false";
       this.saveNotes();
       this.$router.push({ name: "Home" });
     },
@@ -106,6 +117,8 @@ export default {
       localStorage.setItem("notes1", parsed1);
       let parsedText = JSON.stringify(this.notesText);
       localStorage.setItem("notesText", parsedText);
+      let parsedState = JSON.stringify(this.editState);
+      localStorage.setItem("editState", parsedState);
     },
   },
 };
