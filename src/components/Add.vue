@@ -53,15 +53,6 @@ export default {
   },
   data() {
     return {
-      // notes: {
-      //   // name: "",
-      //   // text: "",
-      //   // checked: false,
-      //   notes1: [],
-      //   notesText: [],
-      //   newText: null,
-      //   newNote: null,
-      // },
       notes1: [],
       notesText: [],
       editState: [],
@@ -71,17 +62,6 @@ export default {
     };
   },
   methods: {
-    // async addNote() {
-    //   let result = await axios.post("http://localhost:3000/notes", {
-    //     name: this.notes.name,
-    //     text: this.notes.text,
-    //     checked: this.notes.checked,
-    //   });
-    //   if (result.status == 201) {
-    //     this.$router.push({ name: "Home" });
-    //   }
-    //   console.warn("result", result);
-    // },
     addNote() {
       if (!this.newNote && !this.newText) {
         return;

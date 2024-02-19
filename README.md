@@ -9,16 +9,4 @@ npm install
 ```
 npm run serve
 ```
-
-### Установка json-server для корректной работы приложения
-```
-npm install -g json-server
-```
-
-### Запуск json-server из ./src/components для работы с бд приложения
-```
-npx json-server db.json
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Возможны ошибки из-за автоматического переключения VSCode на CRLF (Select End of Line Sequence). Для корректной работы необходимо - LF. Можно переключить справа снизу возле кодировки, после сохранить файл.
