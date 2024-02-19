@@ -54,7 +54,7 @@
 </template>
 <script>
 import Header from "./Header.vue";
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "Home",
   data() {
@@ -70,7 +70,11 @@ export default {
     };
   },
   async mounted() {
-    this.loadData();
+    // this.loadData();
+    let user = localStorage.getItem("user-info");
+    if (!user) {
+      this.$router.push({ name: "SignUp" });
+    }
     if (localStorage.getItem("notes1")) {
       try {
         this.notes1 = JSON.parse(localStorage.getItem("notes1"));
@@ -97,23 +101,24 @@ export default {
     Header,
   },
   methods: {
-    async deleteNote(id) {
-      let result = await axios.delete("http://localhost:3000/notes/" + id);
-      console.warn(result);
-      if (result.status == 200) {
-        this.loadData();
-      }
-    },
-    async loadData() {
-      let user = localStorage.getItem("user-info");
-      this.name = JSON.parse(user).name;
-      if (!user) {
-        this.$router.push({ name: "SignUp" });
-      }
-      let result = await axios.get("http://localhost:3000/notes");
-      console.warn(result);
-      this.notes = result.data;
-    },
+    // {
+    // async deleteNote(id) {
+    //   let result = await axios.delete("http://localhost:3000/notes/" + id);
+    //   console.warn(result);
+    //   if (result.status == 200) {
+    //     this.loadData();
+    //   }
+    // },
+    // async loadData() {
+    //   let user = localStorage.getItem("user-info");
+    //   this.name = JSON.parse(user).name;
+    //   if (!user) {
+    //     this.$router.push({ name: "SignUp" });
+    //   }
+    // let result = await axios.get("http://localhost:3000/notes");
+    // console.warn(result);
+    // this.notes = result.data;
+    // },
     addNote() {
       if (!this.newNote && !this.newText) {
         return;
