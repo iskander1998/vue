@@ -16,6 +16,13 @@
     />
     <button type="button" @click="addNote">Добавить заметку</button>
   </form>
+  <p></p>
+  <div v-for="(task, index) in tasks" v-bind:key="index">{{ task }}</div>
+  <p></p>
+  <button @click="removeTask(index)">Удалить</button>
+  <p></p>
+  <input v-model="newTask" />
+  <button @click="addTask">Добавить задачу</button>
 </template>
 <script>
 import Header from "./Header.vue";
@@ -47,6 +54,13 @@ export default {
         localStorage.removeItem("editState");
       }
     }
+    if (localStorage.getItem("tasks")) {
+      try {
+        this.tasks = JSON.parse(localStorage.getItem("tasks"));
+      } catch (e) {
+        localStorage.removeItem("tasks");
+      }
+    }
   },
   components: {
     Header,
@@ -56,7 +70,9 @@ export default {
       notes1: [],
       notesText: [],
       editState: [],
+      tasks: [[]],
       newEditState: false,
+      newTask: null,
       newText: null,
       newNote: null,
     };
@@ -71,6 +87,8 @@ export default {
       this.notesText.push(this.newText);
       this.newText = "";
       this.editState.push(this.newEditState);
+      this.tasks.push(this.newTask);
+      this.newTask = "";
       this.newEditState = "false";
       this.saveNotes();
       this.$router.push({ name: "Home" });
@@ -82,6 +100,23 @@ export default {
       localStorage.setItem("notesText", parsedText);
       let parsedState = JSON.stringify(this.editState);
       localStorage.setItem("editState", parsedState);
+      let parsedTask = JSON.stringify(this.tasks);
+      localStorage.setItem("tasks", parsedTask);
+    },
+    // новая фича
+    addTask() {
+      if (!this.newTask) return;
+      this.tasks.push(this.newTask);
+      this.newTask = [""];
+      this.saveTasks();
+    },
+    removeTask(x) {
+      this.tasks.splice(x, 1);
+      this.saveTasks();
+    },
+    saveTasks() {
+      let parsed = JSON.stringify(this.tasks);
+      localStorage.setItem("tasks", parsed);
     },
   },
 };

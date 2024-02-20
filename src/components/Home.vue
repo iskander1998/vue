@@ -45,11 +45,21 @@
           placeholder="Введите текст заметки"
           v-model="this.notesText[index]"
         />
+        Изменить задачи:
+        <p></p>
+        <input
+          class="input_text"
+          type="text"
+          name="name"
+          placeholder="Введите текст заметки"
+          v-model="this.tasks[index]"
+        />
         <button class="sv_but" @click="updateNotes(index)">💾</button>
         <button class="cn_but" @click="cancelNotes(index)">⛔</button>
       </div>
       <p @click="editState[index] = !editState[index]" class="text_field">
         {{ notesText[index] }}
+        {{ tasks[index] }}
       </p>
       <p></p>
       <p></p>
@@ -66,6 +76,7 @@ export default {
       notes: [],
       notes1: [],
       notesText: [],
+      tasks: [],
       newText: null,
       newNote: null,
       modalOpen: false,
