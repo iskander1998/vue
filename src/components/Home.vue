@@ -110,6 +110,13 @@ export default {
         localStorage.removeItem("user-info");
       }
     }
+    if (localStorage.getItem("tasks")) {
+      try {
+        this.tasks = JSON.parse(localStorage.getItem("tasks"));
+      } catch (e) {
+        localStorage.removeItem("tasks");
+      }
+    }
   },
   components: {
     Header,

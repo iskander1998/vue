@@ -70,7 +70,7 @@ export default {
       notes1: [],
       notesText: [],
       editState: [],
-      tasks: [[]],
+      tasks: [],
       newEditState: false,
       newTask: null,
       newText: null,
@@ -100,14 +100,14 @@ export default {
       localStorage.setItem("notesText", parsedText);
       let parsedState = JSON.stringify(this.editState);
       localStorage.setItem("editState", parsedState);
-      let parsedTask = JSON.stringify(this.tasks);
-      localStorage.setItem("tasks", parsedTask);
+      let parsedTask = JSON.stringify([this.tasks]);
+      localStorage.setItem("tasks", [parsedTask]);
     },
     // новая фича
     addTask() {
       if (!this.newTask) return;
       this.tasks.push(this.newTask);
-      this.newTask = [""];
+      this.newTask = "";
       this.saveTasks();
     },
     removeTask(x) {
@@ -115,7 +115,7 @@ export default {
       this.saveTasks();
     },
     saveTasks() {
-      let parsed = JSON.stringify(this.tasks);
+      let parsed = JSON.stringify([this.tasks]);
       localStorage.setItem("tasks", parsed);
     },
   },
