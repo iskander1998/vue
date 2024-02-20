@@ -36,7 +36,7 @@
           v-model="this.notes1[index]"
         />
         <p></p>
-        Изменить текст заметки:
+        Изменить описание заметки:
         <p></p>
         <input
           class="input_text"
@@ -45,23 +45,31 @@
           placeholder="Введите текст заметки"
           v-model="this.notesText[index]"
         />
+        <p></p>
         Изменить задачи:
         <p></p>
         <input
           class="input_text"
           type="text"
           name="name"
-          placeholder="Введите текст заметки"
+          placeholder="Все задачи"
           v-model="this.tasks[index]"
         />
+        <input
+          class="input_text"
+          type="text"
+          name="name"
+          placeholder="Введите задачу"
+          v-model="newTask"
+        />
+        <button @click="addTask(index)">Добавить задачу</button>
         <button class="sv_but" @click="updateNotes(index)">💾</button>
         <button class="cn_but" @click="cancelNotes(index)">⛔</button>
       </div>
       <p @click="editState[index] = !editState[index]" class="text_field">
-        {{ notesText[index] }}
-        {{ tasks[index] }}
+        Описание: {{ notesText[index] }};
       </p>
-      <p></p>
+      <p>Задачи: {{ tasks[index] }}</p>
       <p></p>
     </div>
   </div>
@@ -78,10 +86,11 @@ export default {
       notesText: [],
       tasks: [],
       newText: null,
-      newNote: null,
+      newNote: [],
       modalOpen: false,
       userinfo: [],
       editState: [],
+      newTask: [],
     };
   },
   async mounted() {
@@ -122,16 +131,6 @@ export default {
     Header,
   },
   methods: {
-    addNote() {
-      if (!this.newNote && !this.newText) {
-        return;
-      }
-      this.notes1.push(this.newNote);
-      this.newNote = "";
-      this.notesText.push(this.newText);
-      this.newText = "";
-      this.saveNotes();
-    },
     removeNote(x) {
       this.modalOpen = false;
       this.notes1.splice(x, 1);
@@ -146,16 +145,25 @@ export default {
       localStorage.setItem("notesText", parsedText);
       let parsedState = JSON.stringify(this.editState);
       localStorage.setItem("editState", parsedState);
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     updateNotes(x) {
       this.notes1.x = JSON.stringify(this.notes1[x]);
       this.notesText.x = JSON.stringify(this.notesText[x]);
+      this.tasks.x = JSON.stringify(this.tasks[x]);
       this.editState[x] = false;
       this.saveNotes();
     },
     cancelNotes() {
       this.notesText = JSON.parse(localStorage.getItem("notesText"));
       this.notes1 = JSON.parse(localStorage.getItem("notes1"));
+    },
+    addTask(x) {
+      if (!this.newTask) return;
+      this.tasks[x] = " " + this.tasks[x] + this.newTask + ";" + "\n";
+      this.tasks.x = JSON.stringify(this.tasks[x]);
+      this.newTask = "";
+      this.saveNotes();
     },
   },
 };

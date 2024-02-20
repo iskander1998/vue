@@ -72,7 +72,7 @@ export default {
       editState: [],
       tasks: [],
       newEditState: false,
-      newTask: null,
+      newTask: "",
       newText: null,
       newNote: null,
     };
@@ -100,22 +100,22 @@ export default {
       localStorage.setItem("notesText", parsedText);
       let parsedState = JSON.stringify(this.editState);
       localStorage.setItem("editState", parsedState);
-      let parsedTask = JSON.stringify([this.tasks]);
-      localStorage.setItem("tasks", [parsedTask]);
+      // --------------------
+      let result = this.tasks;
+      localStorage.setItem("tasks", JSON.stringify(result));
     },
     // новая фича
     addTask() {
       if (!this.newTask) return;
-      this.tasks.push(this.newTask);
+      this.tasks[1].push(this.newTask);
       this.newTask = "";
-      this.saveTasks();
     },
     removeTask(x) {
       this.tasks.splice(x, 1);
       this.saveTasks();
     },
     saveTasks() {
-      let parsed = JSON.stringify([this.tasks]);
+      let parsed = JSON.stringify(this.tasks);
       localStorage.setItem("tasks", parsed);
     },
   },
