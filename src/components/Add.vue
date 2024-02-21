@@ -14,7 +14,7 @@
       placeholder="Введите описание заметки"
       v-model="newText"
     />
-    <div v-for="(task, index) in tasks" v-bind:key="index">
+    <!-- <div v-for="(task, index) in tasks" v-bind:key="index">
       {{ task[index] }}
     </div>
     <h1>Задачи</h1>
@@ -24,7 +24,7 @@
       placeholder="Введите название задачи"
       v-model="newTask"
     />
-    <button @click="addTask(index)">Добавить задачу</button>
+    <button @click="addTask(index)">Добавить задачу</button> -->
     <p></p>
     <button type="button" @click="addNote">Добавить заметку</button>
   </form>
