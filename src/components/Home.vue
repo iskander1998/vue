@@ -55,6 +55,7 @@
           placeholder="Все задачи"
           v-model="this.tasks[index]"
         />
+        <p></p>
         <input
           class="input_text"
           type="text"
@@ -67,9 +68,11 @@
         <button class="cn_but" @click="cancelNotes(index)">⛔</button>
       </div>
       <p @click="editState[index] = !editState[index]" class="text_field">
-        Описание: {{ notesText[index] }};
+        Описание: {{ notesText[index] }}
       </p>
-      <p>Задачи: {{ tasks[index] }}</p>
+      <p @click="editState[index] = !editState[index]" class="text_field">
+        Задачи: {{ tasks[index] }}
+      </p>
       <p></p>
     </div>
   </div>
@@ -135,6 +138,7 @@ export default {
       this.modalOpen = false;
       this.notes1.splice(x, 1);
       this.notesText.splice(x, 1);
+      this.tasks.splice(x, 1);
       this.editState.splice(x, 1);
       this.saveNotes();
     },
@@ -157,13 +161,13 @@ export default {
     cancelNotes() {
       this.notesText = JSON.parse(localStorage.getItem("notesText"));
       this.notes1 = JSON.parse(localStorage.getItem("notes1"));
+      this.tasks = JSON.parse(localStorage.getItem("tasks"));
     },
     addTask(x) {
       if (!this.newTask) return;
-      this.tasks[x] = " " + this.tasks[x] + this.newTask + ";" + "\n";
+      this.tasks[x] = this.tasks[x] + this.newTask + "; ";
       this.tasks.x = JSON.stringify(this.tasks[x]);
       this.newTask = "";
-      this.saveNotes();
     },
   },
 };
@@ -396,7 +400,7 @@ td {
 .input_text {
   padding-top: 3%;
   padding-right: 20px;
-  width: 90%;
+  width: 85%;
   word-wrap: break-word;
 }
 /*  */
