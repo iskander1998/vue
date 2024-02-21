@@ -11,18 +11,25 @@
     <input
       type="text"
       name="name"
-      placeholder="Введите текст заметки"
+      placeholder="Введите описание заметки"
       v-model="newText"
     />
+    <div v-for="(task, index) in tasks" v-bind:key="index">
+      {{ task[index] }}
+    </div>
+    <h1>Задачи</h1>
+    <input
+      type="text"
+      name="name"
+      placeholder="Введите название задачи"
+      v-model="newTask"
+    />
+    <button @click="addTask(index)">Добавить задачу</button>
+    <p></p>
     <button type="button" @click="addNote">Добавить заметку</button>
   </form>
   <p></p>
-  <div v-for="(task, index) in tasks" v-bind:key="index">{{ task }}</div>
   <p></p>
-  <button @click="removeTask(index)">Удалить</button>
-  <p></p>
-  <input v-model="newTask" />
-  <button @click="addTask">Добавить задачу</button>
 </template>
 <script>
 import Header from "./Header.vue";
@@ -107,12 +114,9 @@ export default {
     // новая фича
     addTask() {
       if (!this.newTask) return;
-      this.tasks[1].push(this.newTask);
+      this.tasks = this.tasks + this.newTask + "; ";
+      this.tasks = JSON.stringify(this.tasks);
       this.newTask = "";
-    },
-    removeTask(x) {
-      this.tasks.splice(x, 1);
-      this.saveTasks();
     },
     saveTasks() {
       let parsed = JSON.stringify(this.tasks);

@@ -143,12 +143,9 @@ export default {
       this.saveNotes();
     },
     saveNotes() {
-      let parsed1 = JSON.stringify(this.notes1);
-      localStorage.setItem("notes1", parsed1);
-      let parsedText = JSON.stringify(this.notesText);
-      localStorage.setItem("notesText", parsedText);
-      let parsedState = JSON.stringify(this.editState);
-      localStorage.setItem("editState", parsedState);
+      localStorage.setItem("notes1", JSON.stringify(this.notes1));
+      localStorage.setItem("notesText", JSON.stringify(this.notesText));
+      localStorage.setItem("editState", JSON.stringify(this.editState));
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     updateNotes(x) {
@@ -399,7 +396,9 @@ td {
 }
 .input_text {
   padding-top: 3%;
-  padding-right: 20px;
+  padding-bottom: 3%;
+  padding-right: 10px;
+  padding-left: 10px;
   width: 85%;
   word-wrap: break-word;
 }
