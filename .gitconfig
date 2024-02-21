@@ -1,2 +1,6 @@
 [core]
-    autocrlf=false
+    autocrlf = false
+[user]
+    name = Iskander
+    email = iskander@helloworld.com
+    username = iskander
